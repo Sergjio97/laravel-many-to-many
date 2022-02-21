@@ -50,7 +50,8 @@ class PostController extends Controller
             'title' => 'required|string|max:100',
             'content' => 'required',
             'published' => 'sometimes|accepted',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tag_id' => 'nullable|exists:tags,id'
         ]);
 
         // creazione del post
@@ -82,6 +83,10 @@ class PostController extends Controller
 
         //save
         $newPost->save();
+
+        if ( isset($data['tags']) ) {
+            $newPost->tags()->sync($data['tags']);
+        }
 
         // redirect al post creato
         return redirect()->route('posts.show', $newPost->id);
