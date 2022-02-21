@@ -16,9 +16,21 @@
                             <span class="badge badge-secondary">Bozza</span>
                         @endif
                     </div>
-                    <div>
-                        <span class="badge badge-secondary">{{$post->category->name}}</span>
-                    </div>
+
+                    @if ($post->category)
+                        <div>
+                            <span class="badge badge-secondary">{{$post->category->name}}</span>
+                        </div> 
+                    @endif
+
+                    @if ( count($post->tags) > 0 )
+                        @foreach ($post->tags as $tag)
+                            <div>
+                                <span class="badge badge-dark">{{$tag->name}}</span>
+                            </div  
+                        @endforeach
+                    @endif
+
                     {{$post->content}}
 
 
