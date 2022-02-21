@@ -44,10 +44,23 @@
                             @enderror
                         </div>
 
-                        {{-- checkbox --}}
-                        <div class="form-group form-check">
+                        {{-- checkbox tags --}}
+                        <div class="form-group">
 
-                            
+                            <p>Tags</p>
+
+                            @foreach ($tags as $tag)
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="form-check-input" id="{{$tag->slug}}" name="tags[]" value="{{$tags->id}}">
+                                    <label class="form-check-label" for="{{$tag->slug}}">{{$tag->name}}</label> 
+                                </div>
+                            @endforeach
+
+                        </div>
+
+                        {{-- checkbox pubblica --}}
+                        <div class="form-group form-check">
+                           
                             <input type="checkbox" class="form-check-input @error('published') is-invalid @enderror" id="published" name="published" {{old('published') ? 'checked' : ''}}>
                             <label class="form-check-label" for="published">Pubblica</label>  
                             @error('published')
